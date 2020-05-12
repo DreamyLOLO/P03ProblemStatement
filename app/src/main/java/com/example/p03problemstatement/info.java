@@ -32,8 +32,8 @@ public class info extends AppCompatActivity {
         grades = new ArrayList<>();
 
         Intent i = getIntent();
-        final modules first = (modules) i.getSerializableExtra("module");
-        final ArrayList<String> dg = first.getDg();
+        final modules mod = (modules) i.getSerializableExtra("module");
+        final ArrayList<String> dg = mod.getDg();
         for(int f = 0; f < dg.size(); f++){
             grades.add(dg.get(f));
         }
@@ -51,7 +51,7 @@ public class info extends AppCompatActivity {
                 }
                 String msg = "Hi faci,\n\nI am ...\nPlease see my remarks so far,thank you!\n\n" + gradeComment;
                 Intent email = new Intent(Intent.ACTION_SEND);
-                email.putExtra(Intent.EXTRA_EMAIL, new String[]{first.getEmail()});
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{mod.getEmail()});
                 email.putExtra(Intent.EXTRA_SUBJECT,"Test Email from C347");
                 email.putExtra(Intent.EXTRA_TEXT, msg);
                 email.setType("message/rfc822");
@@ -62,7 +62,7 @@ public class info extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(info.this, add.class);
-                i.putExtra("module", first);
+                i.putExtra("module", mod);
                 startActivityForResult(i, requestCodeForAdd);
             }
         });
@@ -71,9 +71,9 @@ public class info extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
-                if(first.getCode().equalsIgnoreCase("C347")) {
+                if(mod.getCode().equalsIgnoreCase("C347")) {
                     i.setData(Uri.parse("https://www.rp.edu.sg/schools-courses/courses/full-time-diplomas/full-time-courses/modules/index/C347"));
-                } else if(first.getCode().equalsIgnoreCase("C203")) {
+                } else if(mod.getCode().equalsIgnoreCase("C203")) {
                     i.setData(Uri.parse("https://www.rp.edu.sg/schools-courses/courses/full-time-diplomas/full-time-courses/modules/index/C203"));
                 }
                 startActivityForResult(i, requestCodeInternet);

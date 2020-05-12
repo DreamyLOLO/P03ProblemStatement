@@ -29,9 +29,9 @@ public class add extends AppCompatActivity {
         tvweek = findViewById(R.id.textViewWeek);
 
         Intent i = getIntent();
-        final modules a = (modules) i.getSerializableExtra("module");
-        final ArrayList<String> b = a.getDg();
-        tvweek.setText("Week " + (b.size() + 1));
+        final modules mod = (modules) i.getSerializableExtra("module");
+        final ArrayList<String> dg = mod.getDg();
+        tvweek.setText("Week " + (dg.size() + 1));
 
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,10 +40,10 @@ public class add extends AppCompatActivity {
                 rbgrade = findViewById(gradeId);
                 String grade = rbgrade.getText().toString();
                 Intent intent = new Intent(add.this, info.class);
-                ArrayList<String> b = a.getDg();
-                b.add(grade);
-                a.setDg(b);
-                intent.putExtra("module", a);
+                ArrayList<String> dg = mod.getDg();
+                dg.add(grade);
+                mod.setDg(dg);
+                intent.putExtra("module", mod);
                 startActivityForResult(intent, requestCodeForAddModule);
             }
         });
